@@ -1,0 +1,49 @@
+
+{% extends 'home_navbar.html' %}
+{% block content %}
+
+    <title>{{ selected_category.name }} - TechTrends</title>
+
+    <div class="container-fluid p-0">
+        <h5 style="background-color: #b5ecf3; padding: 2px; margin-bottom: 0; text-align: center"> {{ selected_category.name }}</h5>
+    </div>
+    <div class="container-fluid p-0 ">
+        {% for product in products %}
+            <div class="card product-card "><!--product-card style inhereited-->
+                <div class="row g-0">
+                    <div class="col-md-3">
+                        <img src="{{ product.image.url }}" class="img-fluid rounded-start mt-3 ms-3 " alt="{{ product.name }}">
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <p><strong>Price Comparison:</strong> {{ product.price_amazon }} (Amazon) | {{ product.price_flipkart }} (Flipkart)</p>
+                            <strong>Average Rating</strong>
+                                <span class="text-muted">({{ product.no_of_users}}):</span> 
+                                <span class="stars">
+                                    {% for i in range_5 %}
+                                        {% if product.average_rating >= i|add:1 %}
+                                            <i class="bi bi-star-fill" style="color: gold;"></i> 
+                                        {% elif product.average_rating >= i|add:0.5 %}
+                                            <i class="bi bi-star-half" style="color: gold;"></i> 
+                                        {% else %}
+                                            <i class="bi bi-star" style="color: gold;"></i> 
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                            
+                                <span class="ms-2">{{ product.average_rating|floatformat:1 }}</span>
+                            </p>
+                            <button class="btn btn-primary" onclick="window.location.href='{% url 'rating_and_review' product.slug %}';">Rate & Review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No products available in this category.</p>
+        {% endfor %}
+    </div>
+
+
+{% endblock content %}

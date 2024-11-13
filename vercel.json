@@ -1,0 +1,19 @@
+{
+    "builds": [
+        {
+            "src": "techtrends/wsgi.py",
+            "use": "@vercel/python",
+            "config":{
+                "maxLambdaSize": "15mb",
+                "runtime":"python2.12"
+            }
+
+        }
+    ],
+    "routes": [
+        {
+            "src":"/(.*)",
+            "dest": "host/wsgi.py"
+        }
+    ]
+}
