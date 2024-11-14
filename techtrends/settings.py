@@ -26,7 +26,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['techtrends_project_1.vercel.app']
+ALLOWED_HOSTS = ['techtrends_project_2.vercel.app']
 
 
 # Application definition
