@@ -3,16 +3,19 @@
         {
             "src": "techtrends/wsgi.py",
             "use": "@vercel/python",
-            "config":{
+            "config": {
                 "maxLambdaSize": "15mb",
-                "runtime":"python2.12"
+                "runtime": "python3.12"
             }
-
         }
     ],
     "routes": [
         {
-            "src":"/(.*)",
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
+        {
+            "src": "/(.*)",
             "dest": "techtrends/wsgi.py"
         }
     ]
